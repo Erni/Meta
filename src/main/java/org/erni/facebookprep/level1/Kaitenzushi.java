@@ -15,6 +15,7 @@ import java.util.*;
  */
 public class Kaitenzushi {
 
+    // this is the most elegant but not the most efficient solution due to the linear cost of LinkedList.contains() method
     public static int getMaximumEatenDishCount(int N, int[] D, int K) {
         Queue<Integer> eatenDishes = new LinkedList<Integer>();
         eatenDishes.add(D[0]); // we eat the first dish :)
@@ -79,6 +80,7 @@ public class Kaitenzushi {
         return totalEatenDishes;
     }
 
+    // this is the most efficient due to the constant cost of Set.contains() method
     public static int getMaximumEatenDishCount4(int N, int[] D, int K) {
         Queue<Integer> eatenDishes = new LinkedList<Integer>();
         Set<Integer> eatenDishesSet = new HashSet<Integer>(K);
