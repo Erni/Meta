@@ -20,21 +20,18 @@ public class DirectorOfPhotography {
      */
     public static int getArtisticPhotographCount(int N, String C, int X, int Y) {
         int artisticPhotographs = 0;
-        for (int i = 1; i < C.length(); i ++) {
+        for (int i = X; i < N-X; i++) {
             if (C.charAt(i) == 'A') {
                 // Check Ps and Bs in the allowed distance to the left
-                for (int j = i - X; j >= i - Y; j--) {
-                    if (j < 0) break;
+                for (int j = i - X; j >= i - Y && j > -1; j--) {
                     if(C.charAt(j) == 'P') {
                         // let´s find out  if we have any Bs on the right of A
-                        for(int k = i + X; k <= i + Y; k++) {
-                            if (k >= N) break;
+                        for(int k = i + X; k <= i + Y && k < N; k++) {
                             if (C.charAt(k) == 'B') artisticPhotographs++;
                         }
                     } else if (C.charAt(j) == 'B') {
                         // let´s find out if we have any Ps on the right of A
-                        for(int k = i + X; k <= i + Y; k++) {
-                            if (k >= N) break;
+                        for(int k = i + X; k <= i + Y && k < N; k++) {
                             if (C.charAt(k) == 'P') artisticPhotographs++;
                         }
                     }
