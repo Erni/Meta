@@ -48,6 +48,7 @@ public class DirectorOfPhotography2 {
         return artisticPhotographs;
     }
 
+    // This one is the most efficient I could come up with
     public static long getArtisticPhotographCount2(int N, String C, int X, int Y) {
         int leftWindowPs = 0;
         int leftWindowBs = 0;
