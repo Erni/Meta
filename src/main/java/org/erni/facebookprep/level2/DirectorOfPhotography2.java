@@ -1,7 +1,8 @@
 package org.erni.facebookprep.level2;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 /**
  * A photograph happens when we can find the chars P, A and B in the String
@@ -113,6 +114,37 @@ public class DirectorOfPhotography2 {
         }
 
         return artisticPhotographs;
+    }
+
+    public static long getArtisticPhotographCount3(int N, String C, int X, int Y) {
+        Set<Integer> actors = new HashSet<Integer>();
+        Set<Integer> photographers = new HashSet<>();
+        Set<Integer> backgrounds = new HashSet<>();
+        AtomicInteger artisticPhotos = new AtomicInteger(0);
+
+        for (int i = 0; i < N; i++) {
+            switch (C.charAt(i)) {
+                case 'A':
+                    actors.add(i);
+                    break;
+                case 'P':
+                    photographers.add(i);
+                    break;
+                case 'B':
+                    backgrounds.add(i);
+                    break;
+            }
+        }
+
+        for (int actor : actors) {
+            photographers.stream().filter(photographer -> Math.abs(photographer - actor) <= Y && Math.abs(photographer - actor) >= X).forEach(
+                    photographer -> {
+                        int distanceBetweenPhotographerAndActor = photographer - actor;
+                        artisticPhotos.addAndGet((int) backgrounds.stream().filter(background -> Math.abs(actor - background) >= X && Math.abs(
+                                actor - background) <= Y && (distanceBetweenPhotographerAndActor > 0 ? ((actor - background) > 0) : (actor - background) < 0)).count());
+                    });
+        }
+        return artisticPhotos.get();
     }
 
     public static void main(String[] args) {
