@@ -37,7 +37,7 @@ public class Day6Lanternfish {
     }
 
     static class MutableLong {
-        private long value = 0; // note that we start at 1 since we're counting
+        private long value = 0;
         public void increment () { ++value; }
         public void increment (long val) { value += val; }
         public long get ()       { return value; }
